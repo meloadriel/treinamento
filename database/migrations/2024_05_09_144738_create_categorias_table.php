@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->string('AMIGOS');
-            $table->string('VIZINHOS');
-            $table->string('PARENTES');
+            $table->string('nome');
             $table->timestamps();
         });
     }
