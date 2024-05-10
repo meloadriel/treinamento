@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('rua');
             $table->string('cidade');
             $table->string('numero');
+            $table->foreignId('contato_id')->constrained('contatos');
             $table->timestamps();
         });
     }
