@@ -15,4 +15,22 @@ class Contato extends Model
     protected $appends = [
 
     ];
+
+    public function enderecoRelationship(){
+
+        return $this->belongsTo(Endereco::class,"endereco_id");
+
+    }
+
+    public function telefoneRelationship(){
+
+        return $this->hasMany(Telefone::class,"contato_id");
+
+}
+    public function categoriaRelationship(){
+
+        return $this->belongsToMany(Categoria::class,"contatos_has_categorias", "contato_id","categoria_id");
+
+}
+
 }

@@ -15,4 +15,7 @@ class Telefone extends Model
     protected $appends = [
 
     ];
+    public function tipoRelationship(){
+        return $this->belongsTo(Tipo::class,"tipo_id");
+    }
 }
