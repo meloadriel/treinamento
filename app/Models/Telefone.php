@@ -15,6 +15,13 @@ class Telefone extends Model
     protected $appends = [
 
     ];
+
+/**
+ *Get the phone type. (Pegue o tipo de telefone.)
+ *
+ * @return Tipo
+*/
+
     public function tipoRelationship(){
         return $this->belongsTo(Tipo::class,"tipo_id");
     }
