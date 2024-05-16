@@ -33,6 +33,11 @@ public function getTipoAttribute() {
     return $this->getTipoAttribute();
 }
 
+public function setTelefoneAttribute($value) {
+    if (isset($value)) {
+        $this->attributes["contato_id"] = Contato::where("id", $value)->first()->id;
+    }
+}
 public function setTipoAttribute($value) {
 
     if(isset($value)) {
