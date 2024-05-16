@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(array(
             CategoriaSeeder::class,
             TipoSeeder::class,
-            ContatoSeeder::class,
             EnderecoSeeder::class,
+            ContatoSeeder::class,
         ));
 
 

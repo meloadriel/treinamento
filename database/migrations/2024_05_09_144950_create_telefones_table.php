@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('telefones', function (Blueprint $table) {
             $table->id();
             $table->string('numero');
-            $table->foreignId('contato_id')->constrained('contatos');
-            $table->foreignId('tipo_id')->constrained('tipos');
             $table->timestamps();
         });
     }
