@@ -29,6 +29,17 @@ class Telefone extends Model
 
     ];
 
+public function getTipoAttribute() {
+    return $this->getTipoAttribute();
+}
+
+public function setTipoAttribute($value) {
+
+    if(isset($value)) {
+        $this->attributes["tipo_id"] = Contato::where("id", $value)->first()->id;
+
+}
+}
 /**
  *Get the phone type. (Pegue o tipo de telefone.)
  *

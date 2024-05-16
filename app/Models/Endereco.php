@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Endereco extends Model
 {
+
+public function getEnderecoAttribute(){
+    return $this->enderecoRelationship;
+}
+
 /**
  * The table associated with the model.
  *
@@ -30,4 +35,5 @@ class Endereco extends Model
     protected $appends = [
 
     ];
+
 }
