@@ -17,7 +17,7 @@ class EnderecoSeeder extends Seeder
             'rua' => 'Rua 01',
             'numero' => '111',
             'cidade' => 'Aracaju',
-            'contato_id' =>1,
+            
         ]);
 
         // DB::table("enderecos")->insert([

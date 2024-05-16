@@ -14,6 +14,7 @@ class ContatoSeeder extends Seeder
     {
         DB::table("contatos")->insert([
             "nome" => "moral",
+            "endereco_id"  => 1,
         ]);
     }
 }

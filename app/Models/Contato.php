@@ -34,15 +34,15 @@ class Contato extends Model
     // Getters
 
     public function getEnderecoAttribute() {
-        return $this->enderecoRelationship();
+        return $this->enderecoRelationship;
     }
 
     public function getTelefoneAttribute() {
-        return $this->telefoneRelationship();
+        return $this->telefoneRelationship;
     }
 
     public function getCategoriaAttribute() {
-        return $this->categoriaRelationship();
+        return $this->categoriaRelationship;
     }
 
     // Setters
