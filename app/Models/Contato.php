@@ -28,6 +28,9 @@ class Contato extends Model
      * @var array
      */
     protected $appends = [
+        'categoria',
+        'endereco',
+        'telefone'
 
     ];
 
