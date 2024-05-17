@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tipo;
+use App\Models\Categoria;
+use App\Models\Endereco;
+use App\Models\Telefone;
 use Illuminate\Http\Request;
 use App\Models\Contato;
 
@@ -11,6 +15,10 @@ class ContatoController extends Controller
     public function __construct(Contato $contatos)
     {
         $this->contatos = $contatos;
+        $this->enderecos = new Endereco;
+        $this->categorias = Categoria::all()->pluck("nome","id");
+        $this->telefones = Telefone::all()->pluck("numero","id");
+        $this->tipos =Tipo::all()->pluck("nome","id");
     }
 
     /**
@@ -28,7 +36,10 @@ class ContatoController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = $this->categorias;
+        $tipos = $this->tipos;
+
+        return view("contatos.form", compact("categorias","tipos"));
     }
 
     /**
