@@ -16,9 +16,9 @@ class ContatoController extends Controller
     {
         $this->contatos = $contatos;
         $this->enderecos = new Endereco;
-        $this->categorias = Categoria::all()->pluck("nome","id");
-        $this->telefones = Telefone::all()->pluck("numero","id");
-        $this->tipos =Tipo::all()->pluck("nome","id");
+        $this->categorias = Categoria::all()->pluck("nome", "id");
+        $this->telefones = new Telefone;
+        $this->tipos = Tipo::all()->pluck("nome", "id");
     }
 
     /**
@@ -39,7 +39,7 @@ class ContatoController extends Controller
         $categorias = $this->categorias;
         $tipos = $this->tipos;
 
-        return view("contatos.form", compact("categorias","tipos"));
+        return view("contatos.form", compact("categorias", "tipos"));
     }
 
     /**
@@ -47,15 +47,43 @@ class ContatoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $contato = $this->contatos->create([
+            'nome' => $request->nome,
+            'endereco_id' => $this->enderecos->create([
+                'rua' => $request->rua,
+                'numero' => $request->numero,
+                'cidade' => $request->cidade,
+            ])->id,
+        ]);
+        for ($i = 0; $i < count($request->telefones); $i++) {
+            $this->telefones->create([
+                'numero' => $request->telefones[$i],
+                'contato_id' => $contato->id,
+                'tipo_id' => $request->tipo,
+            ]);
+        }
+
+        $contato->categoriaRelationship()->attach($request->categoria);
+
+        return redirect()->route('contatos.index')->with('success', 'Contato criado com sucesso!');
     }
+
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $form = 'disabled';
+
+        $contato = $this->contatos->find($id);
+        $categorias = $this->categorias;
+        $telefones = $this->telefones;
+
+
+        return view('contatos.form', compact('categorias', 'telefones', 'form', 'contato'));
     }
 
     /**
@@ -63,7 +91,12 @@ class ContatoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $contato = $this->contatos->find($id);
+        $categorias = $this->categorias;
+        $telefones = $this->telefones;
+        $tipos = $this->tipos;
+
+        return view('contatos.form', compact('contato', 'categorias', 'telefones','tipos' ));
     }
 
     /**
@@ -71,7 +104,27 @@ class ContatoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $contato = $this->contatos->find($id);
+        $contato->update([
+            'nome' => $request->nome,
+            'endereco_id' => tap($this->enderecos->find($contato->endereco->id))->update([
+                'rua' => $request->rua,
+                'numero' => $request->numero,
+                'cidade' => $request->cidade,
+            ])->id,
+        ]);
+
+        for ($i = 0; $i < count($request->telefones); $i++) {
+            $this->telefones->update([
+                'numero' => $request->telefones[$i],
+                'contato_id' => $contato->id,
+                'tipo_id' => $request->tipo,
+            ]);
+        }
+
+        $contato->categoriaRelationship()->sync($request->categoria);
+
+        return redirect()->route('contatos.index')->with('success', 'Contato editado com sucesso!');
     }
 
     /**
@@ -79,6 +132,14 @@ class ContatoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $contato = $this->contatos->find($id);
+        $contato->categoriaRelationship()->sync(null);
+        foreach ($contato->telefone as $telefone) {
+            $telefone->delete();
+        }
+        $endereco = $contato->endereco;
+        $contato->delete();
+        $endereco->delete();
+        return redirect()->route('contatos.index');
     }
 }
