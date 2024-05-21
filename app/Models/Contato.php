@@ -38,29 +38,39 @@ class Contato extends Model
 
     ];
 
+    protected $fillable = [
+        'nome',
+        'endereco_id'
+    ];
+
     // Getters
 
-    public function getEnderecoAttribute() {
+    public function getEnderecoAttribute()
+    {
         return $this->enderecoRelationship;
     }
 
-    public function getTelefoneAttribute() {
+    public function getTelefoneAttribute()
+    {
         return $this->telefoneRelationship;
     }
 
-    public function getCategoriaAttribute() {
+    public function getCategoriaAttribute()
+    {
         return $this->categoriaRelationship;
     }
 
     // Setters
 
-    public function setEnderecoAttribute($value) {
+    public function setEnderecoAttribute($value)
+    {
         if (isset($value)) {
             $this->attributes["endereco_id"] = Endereco::where("id", $value)->first()->id;
         }
     }
 
-    public function setCategoriaAttribute($value) {
+    public function setCategoriaAttribute($value)
+    {
         $this->categoriaRelationship()->sync($value);
     }
 
@@ -71,7 +81,8 @@ class Contato extends Model
      *
      * @return Endereco
      */
-    public function enderecoRelationship() {
+    public function enderecoRelationship()
+    {
         return $this->belongsTo(Endereco::class, "endereco_id");
     }
 
@@ -80,7 +91,8 @@ class Contato extends Model
      *
      * @return Telefone
      */
-    public function telefoneRelationship() {
+    public function telefoneRelationship()
+    {
         return $this->hasMany(Telefone::class, "contato_id");
     }
 
@@ -89,7 +101,8 @@ class Contato extends Model
      *
      * @return Categoria
      */
-    public function categoriaRelationship() {
+    public function categoriaRelationship()
+    {
         return $this->belongsToMany(Categoria::class, "contatos_has_categorias", "contato_id", "categoria_id");
     }
 }

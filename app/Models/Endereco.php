@@ -37,4 +37,9 @@ public function getEnderecoAttribute(){
 
     ];
 
+    protected $fillable = [
+        'rua',
+        'numero',
+        'cidade',
+    ];
 }

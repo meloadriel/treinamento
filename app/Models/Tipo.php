@@ -29,5 +29,6 @@ class Tipo extends Model
     protected $appends = [
 
     ];
+    
 
 }

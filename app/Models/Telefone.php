@@ -30,6 +30,11 @@ class Telefone extends Model
     protected $appends = [
 
     ];
+    protected $fillable = [
+        'numero',
+        'contato_id',
+        'tipo_id'
+    ];
 
 public function getTipoAttribute() {
     return $this->getTipoAttribute();
