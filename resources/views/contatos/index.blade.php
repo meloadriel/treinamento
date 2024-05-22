@@ -37,14 +37,14 @@
                 </li>
             @endforeach
             <li>
-                <a href="{{route('contatos.edit', ['id' => $contato->id])}}">Editar Contato</a>
+                <a href="{{ route('contatos.edit', ['id' => $contato->id]) }}">Editar Contato</a>
             </li>
             <li>
-                <form action="{{route('contatos.destroy', ['id' => $contato->id])}}" method="POST">
+                <form action="{{ route('contatos.destroy', ['id' => $contato->id]) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                <button type="submit">DELETAR CONTATO</button>
-            </form>
+                    <button type="submit">DELETAR CONTATO</button>
+                </form>
             </li>
         </ul>
     @endforeach

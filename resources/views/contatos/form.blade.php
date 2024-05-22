@@ -34,16 +34,37 @@
         @if (isset($contato)) value='{{ $contato->endereco->numero }}' @endif required
         placeholder= "Digite o numero da sua casa">
 
-    <input type="text" id="telefones" name="telefones[]"
-        @if (isset($contato)) value='{{ $contato->telefone[0]->numero }}' @endif required
-        placeholder="Digite o seu telefone">
+    @if (isset($contato))
+        @foreach ($contato->telefone as $telefone)
+            <input type="text" id="telefones" name="telefones[]"
+                @if (isset($contato)) value='{{ $telefone->numero }}' @endif required
+                placeholder="Digite o seu telefone">
+            <select name="tipos[]" id="tipo">
+                @for ($i = 1; $i <= count($tipos); $i++)
+                    <option value="{{ $i }}"  @if ($telefone->tipo_id === $i)
+                        selected
+                    @endif>{{ $tipos[$i] }}
+                    </option>
+                @endfor
+            </select>
+            <div id="grupoTelefones">
+            </div>
+        @endforeach
+    @else
+        <input type="text" id="telefones" name="telefones[]" required placeholder="Digite o seu telefone">
+        <select name="tipos[]" id="tipo">
+            @for ($i = 1; $i <= count($tipos); $i++)
+                <option value="{{ $i }}">{{ $tipos[$i] }}
+                </option>
+            @endfor
+        </select>
+        <div id="grupoTelefones">
+        </div>
+    @endif
 
-    <select name="tipo" id="tipo">
-        @for ($i = 1; $i <= count($tipos); $i++)
-            <option  value="{{ $i }}">{{ $tipos[$i] }}
-            </option>
-        @endfor
-    </select>
+    <button id="botaoAdicionarTelefone">Novo Telefone</button>
+
+
 
     @for ($i = 1; $i <= count($categorias); $i++)
         <input type="radio" id="{{ $categorias[$i] }}" name="categoria" value="{{ $i }}" checked>
@@ -52,6 +73,8 @@
 
     <button type="submit">Criar Contato</button>
     </form>
+
+    <script src="{{ asset('app.js') }}"></script>
 </body>
 
 </html>
