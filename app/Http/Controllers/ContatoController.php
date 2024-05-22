@@ -60,7 +60,7 @@ class ContatoController extends Controller
             $this->telefones->create([
                 'numero' => $request->telefones[$i],
                 'contato_id' => $contato->id,
-                'tipo_id' => $request->tipo,
+                'tipo_id' => $request->tipos[$i],
             ]);
         }
 
@@ -96,7 +96,7 @@ class ContatoController extends Controller
         $telefones = $this->telefones;
         $tipos = $this->tipos;
 
-        return view('contatos.form', compact('contato', 'categorias', 'telefones','tipos' ));
+        return view('contatos.form', compact('contato', 'categorias', 'telefones', 'tipos'));
     }
 
     /**
@@ -105,6 +105,7 @@ class ContatoController extends Controller
     public function update(Request $request, string $id)
     {
         $contato = $this->contatos->find($id);
+
         $contato->update([
             'nome' => $request->nome,
             'endereco_id' => tap($this->enderecos->find($contato->endereco->id))->update([
@@ -113,13 +114,21 @@ class ContatoController extends Controller
                 'cidade' => $request->cidade,
             ])->id,
         ]);
-
+        
         for ($i = 0; $i < count($request->telefones); $i++) {
-            $this->telefones->update([
-                'numero' => $request->telefones[$i],
-                'contato_id' => $contato->id,
-                'tipo_id' => $request->tipo,
-            ]);
+            if ($contato->telefone->get($i) != null) {
+                $contato->telefone->get($i)->update([
+                    'numero' => $request->telefones[$i],
+                    'contato_id' => $contato->id,
+                    'tipo_id' => $request->tipos[$i],
+                ]);
+            } else {
+                $this->telefones->create([
+                    'numero' => $request->telefones[$i],
+                    'contato_id' => $contato->id,
+                    'tipo_id' => $request->tipos[$i],
+                ]);
+            }
         }
 
         $contato->categoriaRelationship()->sync($request->categoria);
