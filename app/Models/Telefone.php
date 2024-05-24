@@ -18,7 +18,7 @@ class Telefone extends Model
  * @var array
  */
     protected $hidden = [
-        'tipoRelationship',
+        //'tipoRelationship',
         'created_at',
         'updated_at',
     ];

@@ -19,7 +19,7 @@ class Contato extends Model
      * @var array
      */
     protected $hidden = [
-        'categoriaRelationship',
+       // 'categoriaRelationship',
         'enderecoRelationship',
         'telefoneRelationship',
         'created_at',
