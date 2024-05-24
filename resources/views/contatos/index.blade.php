@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <title>Agenda Telefonica</title>
 </head>
 
 <body>
-    <a href="{{ route('contatos.create') }}">Criar Contato</a>
+    <button type="submit"><a href="{{ route('contatos.create') }}">Criar Contato</a></button>
 
     @foreach ($contatos as $contato)
         <ul>
@@ -26,16 +27,16 @@
             <li>
                 {{ $contato->endereco->numero }}
             </li>
-            @foreach ($contato->telefone as $telefone)
+            @if ($contato->telefone->isNotEmpty())
                 <li>
-                    {{ $telefone->numero }}
-                    @if ($telefone->tipo_id == 1)
+                    {{ $contato->telefone->first()->numero}}
+                    @if ($contato->telefone->first()->tipo_id == 1)
                         Fixo
                     @else
                         Celular
                     @endif
                 </li>
-            @endforeach
+            @endif
             <li>
                 <a href="{{ route('contatos.edit', ['id' => $contato->id]) }}">Editar Contato</a>
             </li>
