@@ -114,7 +114,7 @@ class ContatoController extends Controller
                 'cidade' => $request->cidade,
             ])->id,
         ]);
-        
+
         for ($i = 0; $i < count($request->telefones); $i++) {
             if ($contato->telefone->get($i) != null) {
                 $contato->telefone->get($i)->update([
@@ -143,9 +143,10 @@ class ContatoController extends Controller
     {
         $contato = $this->contatos->find($id);
         $contato->categoriaRelationship()->sync(null);
-        foreach ($contato->telefone as $telefone) {
-            $telefone->delete();
-        }
+        $contato->telefoneRelationship()->delete();
+        // foreach ($contato->telefone as $telefone) {
+        //     $telefone->delete();
+        // }
         $endereco = $contato->endereco;
         $contato->delete();
         $endereco->delete();
