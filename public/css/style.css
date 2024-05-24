@@ -1,0 +1,74 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 20px;
+} */
+
+button {
+    color: #ecf0f1;
+    font-size: 17px;
+    background-color: #e67e22;
+    border: 1px solid #f39c12;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    box-shadow: 0px 6px 0px #d35400;
+    transition: all 0.1s;
+  }
+
+  button:active {
+    box-shadow: 0px 2px 0px #d35400;
+    position: relative;
+    top: 2px;
+  }
+
+  button a {
+    color: white;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    background-color: white;
+    border: 0px solid #ddd;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+ul li a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+form {
+    display: inline;
+}
+
+form button {
+    background-color: #FF4C4C;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}

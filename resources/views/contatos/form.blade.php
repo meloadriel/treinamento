@@ -71,7 +71,7 @@
         <label for="{{ $categorias[$i] }}">{{ $categorias[$i] }}</label>
     @endfor
 
-    <button type="submit">Criar Contato</button>
+    <button type="submit">Salvar Contato</button>
     </form>
 
     <script src="{{ asset('app.js') }}"></script>

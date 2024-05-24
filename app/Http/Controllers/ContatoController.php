@@ -143,10 +143,10 @@ class ContatoController extends Controller
     {
         $contato = $this->contatos->find($id);
         $contato->categoriaRelationship()->sync(null);
-        $contato->telefoneRelationship()->delete();
-        // foreach ($contato->telefone as $telefone) {
-        //     $telefone->delete();
-        // }
+        // $contato->telefoneRelationship()->delete();
+        foreach ($contato->telefone as $telefone) {
+             $telefone->delete();
+        }
         $endereco = $contato->endereco;
         $contato->delete();
         $endereco->delete();
