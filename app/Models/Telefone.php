@@ -18,7 +18,9 @@ class Telefone extends Model
  * @var array
  */
     protected $hidden = [
-
+        'tipoRelationship',
+        'created_at',
+        'updated_at',
     ];
 /**
  * The accessors to append to the model's array form.
@@ -27,6 +29,11 @@ class Telefone extends Model
  */
     protected $appends = [
 
+    ];
+    protected $fillable = [
+        'numero',
+        'contato_id',
+        'tipo_id'
     ];
 
 public function getTipoAttribute() {

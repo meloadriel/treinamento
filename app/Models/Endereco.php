@@ -24,7 +24,8 @@ public function getEnderecoAttribute(){
  * @var array
  */
     protected $hidden = [
-
+        'created_at',
+        'updated_at',
     ];
 
 /**
@@ -36,4 +37,9 @@ public function getEnderecoAttribute(){
 
     ];
 
+    protected $fillable = [
+        'rua',
+        'numero',
+        'cidade',
+    ];
 }

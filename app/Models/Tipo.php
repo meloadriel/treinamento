@@ -18,7 +18,8 @@ class Tipo extends Model
  * @var array
  */
     protected $hidden = [
-
+        'created_at',
+        'updated_at',
     ];
 /**
  * The accessors to append to the model's array form.
@@ -28,5 +29,6 @@ class Tipo extends Model
     protected $appends = [
 
     ];
+    
 
 }
