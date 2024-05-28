@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Agenda Telefonica</title>
-    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{asset("build/assets/app-CVRwK_jk.css")}}">
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen py-12 bg-[#ffefcc]">
@@ -14,7 +14,7 @@
         class="px-4 w-[300px] h-[550px] border-[6px] rounded-[30px] border-zinc-900 flex bg-white flex-col justify-start
    ">
         <div class="flex items-center justify-between w-full px-2 h-fit">
-            <span class="text-xs">16:20</span>
+            <span class="text-xs font-bold">16:20</span>
             <div class="w-32 h-6 -mt-1 rounded-b-xl bg-zinc-900"></div>
             <i class="text-xs fa-solid fa-wifi"></i>
         </div>

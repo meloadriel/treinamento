@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Agenda Telefonica</title>
-    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{asset("build/assets/app-CVRwK_jk.css")}}">
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen py-12 bg-[#ffefcc]">
@@ -51,7 +51,7 @@
                             </option>
                         @endfor
                     </select>
-                <input type="text" id="telefones" name="telefones[]" required placeholder="Digite o seu telefone" class="w-full px-2 py-1 text-sm">
+                <input type="number" id="telefones" name="telefones[]" required placeholder="Digite o seu telefone" class="w-full px-2 py-1 text-sm">
                 </div>
                 <div id="grupoTelefones">
                 </div>

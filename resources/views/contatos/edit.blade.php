@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Agenda Telefonica</title>
-    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{asset("build/assets/app-CVRwK_jk.css")}}">
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen py-12 bg-[#ffefcc]">
@@ -69,7 +69,7 @@
                         </div>
                     @endforeach
                 @else
-                    <input type="text" id="telefones" name="telefones[]" required
+                    <input type="number" id="telefones" name="telefones[]" required
                         placeholder="Digite o seu telefone">
                     <select name="tipos[]" id="tipo">
                         @for ($i = 1; $i <= count($tipos); $i++)
@@ -103,6 +103,7 @@
 
         <script src="{{ asset('app.js') }}"></script>
         <script src="https://kit.fontawesome.com/573e44f26e.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
