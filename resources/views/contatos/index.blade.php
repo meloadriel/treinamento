@@ -1,85 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}"> --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    {{-- <link rel="stylesheet" href="{{("css/style.css")}}"> --}}
     <title>Agenda Telefonica</title>
+    <link rel="stylesheet" href="{{asset("build/assets/app-CVRwK_jk.css")}}">
 </head>
 
-<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center py-12">
-    <button type="submit"
-        class="bg-red-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:bg-red-600 mb-4"><a
-            href="{{ route('contatos.create') }}">Criar Contato</a></button>
-    {{-- <button type="submit"><a href="{{ route('contatos.create') }}">Criar Contato</a></button> --}}
-    @foreach ($contatos as $index => $contato)
-    <div class="bg-white rounded-lg shadow-md p-6 mb-4 w-96">
-        <ul>
-            <li class="text-xl font-semibold mb-2">
-                {{ $contato->nome }}
+<body class="flex flex-col items-center justify-center min-h-screen py-12 bg-[#ffefcc]">
+    <div
+        class="px-4 w-[300px] h-[550px] border-[6px] rounded-[30px] border-zinc-900 flex bg-white flex-col justify-start
+   ">
+        <div class="flex items-center justify-between w-full px-2 h-fit">
+            <span class="text-xs font-bold">16:20</span>
+            <div class="w-32 h-6 -mt-1 rounded-b-xl bg-zinc-900"></div>
+            <i class="text-xs fa-solid fa-wifi"></i>
+        </div>
 
-            </li>
-            <li class="text-gray-600 mb-2">
-                {{ $contato->endereco->cidade }}
-            </li>
-            <li>
-                {{ $contato->endereco->rua }}
-            </li>
-            <li>
-                {{ $contato->endereco->numero }}
-            </li>
-            @if ($contato->telefone->isNotEmpty())
-                <li class="text-gray-600 mb-2">
-                    {{ $contato->telefone->first()->numero }}
-                    @if ($contato->telefone->first()->tipo_id == 1)
-                        Fixo
-                    @else
-                        Celular
-                    @endif
+        <div class="mt-5">
+            <div class="flex items-center justify-between">
+                <h1 class="mb-2 text-2xl font-bold">Contatos</h1>
+                <a href="{{ route('contatos.create') }}" class="text-2xl hover:text-blue-300">+</a>
+            </div>
+            <div class="flex items-center gap-2 pt-3 border-t">
+                <img src="https://github.com/meloadriel.png" alt="Foto de Adriel Melo" class="w-10 h-10 rounded-full">
+                <h2 class="text-xs text-gray-400">Meu Cartão</h2>
+            </div>
+        </div>
+
+        <ul class="mt-4 ">
+            @if (count($contatos)> 0)
+                @foreach ($contatos as $index => $contato)
+                    <li>
+                        <a href="{{ route('contatos.show', ['id' => $contato->id]) }}"
+                            class="block w-full py-1 text-sm font-bold border-t"> {{ $contato->nome }} </a>
+                    </li>
+                @endforeach
+            @else
+                <li class="pt-2 text-sm font-bold text-center text-gray-500 border-t">
+                    Você não tem nenhum contato cadastrado
                 </li>
             @endif
-            @if ($contato->telefone->count() > 1)
-                <li>
-                    <button class="text-blue-500 hover:underline" onclick="mostrarSecondNumber({{ $index }})">Mostrar
-                        Segundo Número</button>
-                </li>
-                <li id="second-number-{{ $index }}" class="text-gray-600 mb-2 hidden">
-                    {{ $contato->telefone[1]->numero }}
-                    @if ($contato->telefone[1]->tipo_id == 1)
-                        Fixo
-                    @else
-                        Celular
-                    @endif
-                </li>
-            @endif
-            <li class="mb-2">
-                <a href="{{ route('contatos.edit', ['id' => $contato->id]) }}" class="text-blue-500 hover:underline">Editar Contato</a>
-            </li>
-            <li>
-                <form action="{{ route('contatos.destroy', ['id' => $contato->id]) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:bg-red-600 mb-4" >DELETAR CONTATO</button>
-                </form>
-            </li>
         </ul>
     </div>
-    @endforeach
 
-    <script>
-        function mostrarSecondNumber(index) {
-            var element = document.getElementById('second-number-' + index);
-            if (element.style.display === "none") {
-                element.style.display = 'block';
-            } else {
-                element.style.display = 'none';
-            }
-        }
-    </script>
+
+    <script src="https://kit.fontawesome.com/573e44f26e.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

@@ -39,7 +39,7 @@ class ContatoController extends Controller
         $categorias = $this->categorias;
         $tipos = $this->tipos;
 
-        return view("contatos.form", compact("categorias", "tipos"));
+        return view("contatos.create", compact("categorias", "tipos"));
     }
 
     /**
@@ -83,7 +83,7 @@ class ContatoController extends Controller
         $telefones = $this->telefones;
 
 
-        return view('contatos.form', compact('categorias', 'telefones', 'form', 'contato'));
+        return view('contatos.show', compact('categorias', 'telefones', 'form', 'contato'));
     }
 
     /**
@@ -96,7 +96,7 @@ class ContatoController extends Controller
         $telefones = $this->telefones;
         $tipos = $this->tipos;
 
-        return view('contatos.form', compact('contato', 'categorias', 'telefones', 'tipos'));
+        return view('contatos.edit', compact('contato', 'categorias', 'telefones', 'tipos'));
     }
 
     /**
@@ -133,7 +133,7 @@ class ContatoController extends Controller
 
         $contato->categoriaRelationship()->sync($request->categoria);
 
-        return redirect()->route('contatos.index')->with('success', 'Contato editado com sucesso!');
+        return redirect()->route('contatos.show',['id' => $contato->id])->with('success', 'Contato editado com sucesso!');
     }
 
     /**

@@ -12,5 +12,5 @@ Route::put('/update/{id}', [ContatoController::class,'update'])->name('contatos.
 Route::delete('/destroy/{id}', [ContatoController::class, 'destroy'])->name('contatos.destroy');
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/index');
 });
